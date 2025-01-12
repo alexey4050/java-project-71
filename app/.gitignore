@@ -4,6 +4,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 app/.idea
+app/argum_and_opt.cast
+app/diff-calcul.cast
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
