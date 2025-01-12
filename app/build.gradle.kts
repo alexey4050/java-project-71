@@ -1,6 +1,5 @@
 plugins {
     application
-    java
 }
 
 group = "hexlet.code"
