@@ -4,6 +4,10 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 app/.idea
+app/.idea/.gitignore
+app/.idea/gradle.xml
+app/.idea/misc.xml
+app/.idea/vcs.xml
 app/argum_and_opt.cast
 app/diff-calcul.cast
 
