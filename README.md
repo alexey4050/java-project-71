@@ -12,3 +12,9 @@
 ## Аргументы и опции
 
 [![asciicast](https://asciinema.org/a/dhKPqe6TRTZ54jNtEVP2yR5Mi.svg)](https://asciinema.org/a/dhKPqe6TRTZ54jNtEVP2yR5Mi)
+
+## Сравнение плоских фалов (JSON)
+
+Отсутствие плюса или минуса говорит, что ключ есть в обоих файлах, и его значения совпадают. Во всех остальных ситуациях ключ был либо удалён, либо добавлен, либо изменён.
+
+[![asciicast](https://asciinema.org/a/WBW29efDjDFYHBVdAYKylNMxJ.svg)](https://asciinema.org/a/WBW29efDjDFYHBVdAYKylNMxJ)
