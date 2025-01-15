@@ -11,6 +11,10 @@ import java.util.concurrent.Callable;
         description = "Compares two configuration files and shows a differences.")
 
 public class App implements Callable<Integer> {
+
+    private static final String FILEPATH1 = "src/main/resources/filepath1.json";
+    private static final String FILEPATH2 = "src/main/resources/filepath2.json";
+
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", defaultValue = "stylish", paramLabel = "format")
     String formatSelection;
     @Option(names = {"-V", "--version"}, versionHelp = true, description = "Print version information and exit.")
@@ -22,6 +26,7 @@ public class App implements Callable<Integer> {
     String filepath1;
     @Parameters(index = "1", description = "path to second file")
     String filepath2;
+
     @Override
     public Integer call() {
         if (versionInfoRequested) {
@@ -36,7 +41,13 @@ public class App implements Callable<Integer> {
             System.out.println("Please provide two configuration files to compare");
             return 1;
         }
-        System.out.println("Files provided: " + filepath1 + ", " + filepath2);
+        try {
+            String result = Differ.generate(FILEPATH1, FILEPATH2);
+            System.out.println(result);
+        } catch (Exception e) {
+            System.out.println("Ошибка: " + e.getMessage());
+            return 1;
+        }
         return 0;
     }
 
@@ -52,8 +63,9 @@ public class App implements Callable<Integer> {
             dataToAddFilepath2.put("timeout", 20);
             dataToAddFilepath2.put("verbose", true);
             dataToAddFilepath2.put("host", "hexlet.io");
-            Differ.createFile("src/main/resources/filepath1.json", dataToAddFilepath1);
-            Differ.createFile("src/main/resources/filepath2.json", dataToAddFilepath2);
+
+            Differ.createFile(FILEPATH1, dataToAddFilepath1);
+            Differ.createFile(FILEPATH2, dataToAddFilepath2);
 
             new CommandLine(new App()).execute(args);
         } catch (Exception e) {
