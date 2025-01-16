@@ -30,3 +30,8 @@ jobs:
       - name: Code Coverage
         run: ./gradlew test jacocoTestReport
 
+      - name: Run Code Climate
+        env:
+          CODECLIMATE_REPO_TOKEN: ${{ eeb225040771cb66c069f8c5b027d3de9f9cb0c60d7ed13addfa06a3d1291c0f }}
+        run: codeclimate-test-reporter
+
