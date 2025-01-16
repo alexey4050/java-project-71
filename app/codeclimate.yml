@@ -1,0 +1,8 @@
+version: "2"
+plugins:
+  checkstyle:
+    enable: true
+  test_report:
+    enable: true
+
+
