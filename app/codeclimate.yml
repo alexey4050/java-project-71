@@ -2,7 +2,7 @@ version: "2"
 plugins:
   checkstyle:
     enable: true
-  test_report:
+  test_reporter:
     enable: true
 
 
