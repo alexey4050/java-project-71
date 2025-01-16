@@ -36,15 +36,17 @@ jobs:
       - name: Code Coverage
         run: ./gradlew test jacocoTestReport
 
+      - name: Verify JaCoCo report
+        run: test -f build/reports/jacoco/test/jacocoTestReport.xml
+
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v9.0.0
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-          run: bash <(curl -s https://codeclimate.com/test_reports)
-          #JACOCO_SOURCE_PATH: ${{github.workspace}}/src/main/java
-        #with:
-          #coverageCommand: make report
-          #coverageLocations: ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+          JACOCO_SOURCE_PATH: ${{github.workspace}}
+        with:
+          coverageCommand: make report
+          coverageLocations: ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
         #run: codeclimate-test-reporter upload --input-type jacoco --output-type ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml
 
 
