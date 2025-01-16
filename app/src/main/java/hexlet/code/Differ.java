@@ -2,7 +2,6 @@ package hexlet.code;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,12 +9,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-
 public class Differ {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     public static void createFile(String filePath, Map<String, Object> content) throws Exception {
-        String jsonContent = objectMapper.writeValueAsString(content);
+        String jsonContent = OBJECT_MAPPER.writeValueAsString(content);
         Path writefilePath = Paths.get(filePath);
         Files.writeString(writefilePath, jsonContent);
     }
@@ -26,7 +24,8 @@ public class Differ {
         if (!Files.exists(path)) {
             throw new Exception("File '" + path + "' does not exist.");
         }
-        return objectMapper.readValue(Files.readString(path), new TypeReference<Map<String, Object>>() {});
+        return OBJECT_MAPPER.readValue(Files.readString(path), new TypeReference<Map<String, Object>>() {
+        });
     }
 
     public static String generate(String filepath1, String filepath2) throws Exception {

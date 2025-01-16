@@ -44,7 +44,7 @@ class DifferTest {
     }
 
     @Test
-    public void testGenerate_EqualJson() throws Exception {
+    public void testGenerateEqualJson() throws Exception {
         Map<String, Object> content1 = new HashMap<>();
         content1.put("key", "value");
         Map<String, Object> content2 = new HashMap<>();
@@ -59,7 +59,7 @@ class DifferTest {
     }
 
     @Test
-    public void testGenerate_DifferentValues() throws Exception {
+    public void testGenerateDifferentValues() throws Exception {
         Map<String, Object> content1 = new HashMap<>();
         content1.put("key", "value1");
         Map<String, Object> content2 = new HashMap<>();
@@ -74,7 +74,7 @@ class DifferTest {
     }
 
     @Test
-    public void testGenerate_DifferentKeys() throws Exception {
+    public void testGenerateDifferentKeys() throws Exception {
         Map<String, Object> content1 = new HashMap<>();
         content1.put("key1", "value1");
         Map<String, Object> content2 = new HashMap<>();
@@ -89,7 +89,7 @@ class DifferTest {
     }
 
     @Test
-    public void testGenerate_EmptyFiles() throws Exception {
+    public void testGenerateEmptyFiles() throws Exception {
         Map<String, Object> content1 = new HashMap<>();
         Map<String, Object> content2 = new HashMap<>();
 
@@ -102,7 +102,7 @@ class DifferTest {
     }
 
     @Test
-    public void testGenerate_MultipleDifferences() throws Exception {
+    public void testGenerateMultipleDifferences() throws Exception {
         Map<String, Object> content1 = new HashMap<>();
         content1.put("key1", "value1");
         content1.put("key2", "value2");
@@ -119,7 +119,7 @@ class DifferTest {
     }
 
     @Test
-    public void testGenerate_DifferentDataTypes() throws Exception {
+    public void testGenerateDifferentDataTypes() throws Exception {
         Map<String, Object> content1 = new HashMap<>();
         content1.put("key", true);
         Map<String, Object> content2 = new HashMap<>();

@@ -4,6 +4,7 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
+
 import java.util.HashMap;
 import java.util.concurrent.Callable;
 
@@ -15,7 +16,8 @@ public class App implements Callable<Integer> {
     private static final String FILEPATH1 = "src/main/resources/filepath1.json";
     private static final String FILEPATH2 = "src/main/resources/filepath2.json";
 
-    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", defaultValue = "stylish", paramLabel = "format")
+    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]",
+            defaultValue = "stylish", paramLabel = "format")
     String formatSelection;
     @Option(names = {"-V", "--version"}, versionHelp = true, description = "Print version information and exit.")
     boolean versionInfoRequested;
