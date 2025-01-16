@@ -27,6 +27,12 @@ jobs:
       - name: Checkstyle
         run: ./gradlew checkstyleMain checkstyleTest
 
+      - name: Run tests
+        run: ./gradlew test
+
+      - name: Generate JaCoCo report
+        run: ./gradlew jacocoTestReport
+
       - name: Code Coverage
         run: ./gradlew test jacocoTestReport
 

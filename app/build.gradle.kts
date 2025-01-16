@@ -32,18 +32,15 @@ tasks.test {
     finalizedBy(tasks.jacocoTestReport)
 }
 
-tasks.jacocoTestReport {
-    dependsOn(tasks.test)
-}
-
 jacoco {
     toolVersion = "0.8.12"
 }
 
 tasks.jacocoTestReport {
+    dependsOn(tasks.test)
     reports {
-        xml.required = false
-        csv.required = false
+        xml.required.set(true)
+        csv.required.set(false)
         html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
     }
 }
