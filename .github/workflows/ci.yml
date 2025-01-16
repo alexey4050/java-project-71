@@ -18,23 +18,12 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '21'
-          distribution: 'temurin' java-version: '21'
-
-      - name: Build with Gradle
-        run: ./gradlew build
-
-      - name: Checkstyle
-        run: ./gradlew checkstyleMain checkstyleTest
-
-      - name: Run tests
-        run: ./gradlew test
-
-      - name: Generate JaCoCo report
-        run: ./gradlew jacocoTestReport
-
-      - name: Code Coverage
-        run: ./gradlew test jacocoTestReport
-
+          distribution: 'temurin' 
+      - uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 8.8
+          arguments: build
+          build-root-directory: app
       - name: Publish code coverage
         uses: paambaati/codeclimate-action@v9.0.0
         env:
