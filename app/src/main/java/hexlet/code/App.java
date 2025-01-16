@@ -31,26 +31,27 @@ public class App implements Callable<Integer> {
 
     @Override
     public Integer call() {
+        int result = 0;
         if (versionInfoRequested) {
             System.out.println("Version 1.0.0");
-            return 0;
+            return result;
         }
 
         if (usageHelpRequested) {
-            return 0;
+            return result;
         }
         if (filepath1 == null || filepath2 == null) {
             System.out.println("Please provide two configuration files to compare");
             return 1;
         }
         try {
-            String result = Differ.generate(FILEPATH1, FILEPATH2);
-            System.out.println(result);
+            String output = Differ.generate(FILEPATH1, FILEPATH2);
+            System.out.println(output);
         } catch (Exception e) {
             System.out.println("Ошибка: " + e.getMessage());
             return 1;
         }
-        return 0;
+        return result;
     }
 
     public static void main(String[] args) {
