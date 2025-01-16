@@ -32,6 +32,6 @@ jobs:
 
       - name: Run Code Climate
         env:
-          CODECLIMATE_REPO_TOKEN: ${{ secret.MY_SECRET_CODECLIMATE }}
+          CODECLIMATE_REPO_TOKEN: ${{ secrets.MY_SECRET_CODECLIMATE }}
         run: codeclimate-test-reporter
 
