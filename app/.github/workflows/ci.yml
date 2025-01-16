@@ -33,5 +33,7 @@ jobs:
       - name: Run Code Climate
         env:
           CODECLIMATE_REPO_TOKEN: ${{ secrets.MY_SECRET_CODECLIMATE }}
-        run: codeclimate-test-reporter
+        run: codeclimate-test-reporter upload --input-type jacoco --output-type build/reports/jacoco/test/jacocoTestReport.xml
+
+
 
