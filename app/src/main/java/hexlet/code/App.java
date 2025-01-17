@@ -67,8 +67,8 @@ public class App implements Callable<Integer> {
             dataToAddFilepath2.put("verbose", true);
             dataToAddFilepath2.put("host", "hexlet.io");
 
-            Differ.createFile(FILEPATH1, dataToAddFilepath1);
-            Differ.createFile(FILEPATH2, dataToAddFilepath2);
+            Parser.createJsonFile(FILEPATH1, dataToAddFilepath1);
+            Parser.createJsonFile(FILEPATH2, dataToAddFilepath2);
 
             new CommandLine(new App()).execute(args);
         } catch (Exception e) {
