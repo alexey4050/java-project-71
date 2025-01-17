@@ -1,14 +1,17 @@
+setup:
+	gradle wrapper --gradle-version 8.8
+
 clean:
 	./gradlew clean
 
 build:
-	./gradlew clear build
-
-install:
-	./gradlew clean install
+	./gradlew clean build
 
 run:
-	./gradlew run
+	./gradlew run --args="-h"
+
+lint:
+	./gradlew checkstyleMain checkstyleTest
 
 test:
 	./gradlew test
@@ -16,10 +19,14 @@ test:
 report:
 	./gradlew jacocoTestReport
 
-lint:
-	./gradlew checkstyleMain
+install:
+	./gradlew clean install
 
 run-dist:
-		./build/install/app/bin/app
+	./build/install/app/bin/app -h
+
+check-updates:
+	./gradlew dependencyUpdates
+
 .PHONY: build
 
