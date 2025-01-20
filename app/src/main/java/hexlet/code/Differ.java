@@ -1,41 +1,33 @@
 package hexlet.code;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class Differ {
-    public static String generate(String filepath1, String filepath2) throws Exception {
-        Map<String, Object> map1 = Parser.parseFile(filepath1);
-        Map<String, Object> map2 = Parser.parseFile(filepath2);
+    public static String generate(String filepath1, String filepath2, String format) throws Exception {
+        String content1 = readFile(filepath1);
+        String content2 = readFile(filepath2);
 
-        return generateDiff(map1, map2);
+        String format1 = getFileType(filepath1);
+        String format2 = getFileType(filepath2);
+
+        Map<String, Object> parseFile1 = Parser.parse(content1, format1);
+        Map<String, Object> parseFile2 = Parser.parse(content2, format2);
+
+        List<DifferNode> result = Comparator.compare(parseFile1, parseFile2);
+        return Stylish.format(result);
     }
 
+    public static String readFile(String filePath) throws Exception {
+        Path path = Paths.get(filePath).toAbsolutePath().normalize();
+        return Files.readString(path).trim();
+    }
 
-    public static String generateDiff(Map<String, Object> map1, Map<String, Object> map2) {
-        Set<String> allKeys = new TreeSet<>(map1.keySet());
-        allKeys.addAll(map2.keySet());
-
-        StringBuilder output = new StringBuilder("{\n");
-
-        allKeys.stream().forEach(key -> {
-            boolean inFirstFile = map1.containsKey(key);
-            boolean inSecondFile = map2.containsKey(key);
-            if (inFirstFile && inSecondFile) {
-                if (!map1.get(key).equals(map2.get(key))) {
-                    output.append("  - ").append(key).append(": ").append(map1.get(key)).append("\n");
-                    output.append("  + ").append(key).append(": ").append(map2.get(key)).append("\n");
-                } else {
-                    output.append("    ").append(key).append(": ").append(map1.get(key)).append("\n");
-                }
-            } else if (inFirstFile) {
-                output.append("  - ").append(key).append(": ").append(map1.get(key)).append("\n");
-            } else {
-                output.append("  + ").append(key).append(": ").append(map2.get(key)).append("\n");
-            }
-        });
-        output.append("}");
-        return output.toString();
+    private static String getFileType(String filePath) {
+        String[] pathArray = filePath.split("\\.");
+        return pathArray[pathArray.length - 1];
     }
 }
