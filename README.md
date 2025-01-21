@@ -35,3 +35,7 @@ YAML (рекурсивный акроним англ. «YAML Ain't Markup Langua
 ## Обработка данных
 *./build/install/app/bin/app filepath1.json filepath2.json*
 [![asciicast](https://asciinema.org/a/0ZTQYJytv6aDCMNGhWS9rGgg6.svg)](https://asciinema.org/a/0ZTQYJytv6aDCMNGhWS9rGgg6)
+
+## Плоский формат
+*./build/install/app/bin/app -f plain filepath1.json filepath2.json*
+[![asciicast](https://asciinema.org/a/nKeTpuSLAkdm8ZRZ5W8CrlZrr.svg)](https://asciinema.org/a/nKeTpuSLAkdm8ZRZ5W8CrlZrr)
