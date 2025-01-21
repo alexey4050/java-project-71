@@ -1,12 +1,13 @@
-package hexlet.code;
+package hexlet.code.formatters;
 
+import hexlet.code.DifferNode;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.Objects;
 import java.util.Map;
 
 
-public class Stylish {
+public class StylishFormatter {
     public static String format(List<DifferNode> differences) {
         StringJoiner result = new StringJoiner("\n");
         result.add("{");
@@ -40,7 +41,7 @@ public class Stylish {
     }
 
     private static String formatValue(Object value) {
-        if (value instanceof Map<?, ?> || value instanceof List<?>) {
+        if (value instanceof Map || value instanceof List) {
             return value.toString();
         }
         return Objects.toString(value, "null");

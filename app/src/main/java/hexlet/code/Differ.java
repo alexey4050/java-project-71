@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import hexlet.code.formatters.Formatter;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,7 +20,8 @@ public class Differ {
         Map<String, Object> parseFile2 = Parser.parse(content2, format2);
 
         List<DifferNode> result = Comparator.compare(parseFile1, parseFile2);
-        return Stylish.format(result);
+
+        return Formatter.format(result, format);
     }
 
     public static String readFile(String filePath) throws Exception {
