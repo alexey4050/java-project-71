@@ -34,7 +34,7 @@ class DifferTest {
         String expectedJson = Files.readString(Paths.get(fixturesPath
                 + "json_expected.txt"));
         String actualJson = Differ.generate(fixturesPath + "file1.json",
-                fixturesPath + "file2.json", "json");
+                fixturesPath + "file2.json");
         assertEquals(expectedJson.trim(), actualJson.trim());
     }
 }
