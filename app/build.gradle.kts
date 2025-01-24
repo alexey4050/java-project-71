@@ -30,7 +30,6 @@ tasks.test {
     finalizedBy(tasks.jacocoTestReport)
 }
 
-
 jacoco {
     toolVersion = "0.8.12"
 }
