@@ -27,6 +27,5 @@ public class Parser {
         return YAML_MAPPER.readValue(content, new TypeReference<>() {
         });
     }
-
 }
 
