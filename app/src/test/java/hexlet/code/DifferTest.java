@@ -42,10 +42,10 @@ class DifferTest {
                 "oldValue2", null);
         List<DifferNode> nodes = Arrays.asList(node1, node2);
         String jsonOutput = formatter.format(nodes);
-        String expectedJson ="[{\"name\":\"property1\",\"status\":\"updated\"," +
-                "\"oldValue\":\"oldValue1\",\"newValue\":\"newValue1\"}," +
-                "{\"name\":\"property2\",\"status\":\"removed\"," +
-                "\"oldValue\":\"oldValue2\",\"newValue\":null}]";
+        String expectedJson = "[{\"name\":\"property1\",\"status\":\"updated\","
+                + "\"oldValue\":\"oldValue1\",\"newValue\":\"newValue1\"},"
+                + "{\"name\":\"property2\",\"status\":\"removed\","
+                + "\"oldValue\":\"oldValue2\",\"newValue\":null}]";
         assertEquals(expectedJson, jsonOutput);
     }
 }

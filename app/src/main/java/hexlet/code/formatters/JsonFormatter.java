@@ -6,11 +6,11 @@ import hexlet.code.DifferNode;
 import java.util.List;
 public class JsonFormatter {
 
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     public String format(List<DifferNode> nodes) {
         try {
-            return objectMapper.writeValueAsString(nodes);
+            return OBJECT_MAPPER.writeValueAsString(nodes);
         } catch (Exception e) {
             throw new RuntimeException("Failed to format to JSON", e);
 
