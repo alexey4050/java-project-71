@@ -32,10 +32,9 @@ class DifferTest {
     @Test
     void testJsonFormatter() throws Exception {
         String expectedJson = Files.readString(Paths.get(fixturesPath
-                + "json_expected.txt")).trim();
+                + "json_expected.txt"));
         String actualJson = Differ.generate(fixturesPath + "file1.json",
                 fixturesPath + "file2.json", "json");
         assertEquals(expectedJson.trim(), actualJson.trim());
     }
 }
-

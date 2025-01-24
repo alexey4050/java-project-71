@@ -11,7 +11,7 @@ public class Formatter {
         return switch (formatName) {
             case "plain" -> PlainFormatter.format(nodes);
             case "stylish" -> StylishFormatter.format(nodes);
-            case "json" -> new JsonFormatter().format(nodes);
+            case "json" ->  new JsonFormatter().format(nodes);
             default -> throw new IllegalArgumentException("Unknown formatName: " + formatName);
         };
     }
