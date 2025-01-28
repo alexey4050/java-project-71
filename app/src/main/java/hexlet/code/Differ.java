@@ -17,7 +17,7 @@ public class Differ {
         Map<String, Object> parseFile1 = Parser.parse(content1, format1);
         Map<String, Object> parseFile2 = Parser.parse(content2, format2);
 
-        List<DifferNode> result = Comparator.compare(parseFile1, parseFile2);
+        List<Map<String, Object>> result = Comparator.compare(parseFile1, parseFile2);
 
         return Formatter.format(result, format);
     }

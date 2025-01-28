@@ -1,35 +1,35 @@
 package hexlet.code.formatters;
 
-import hexlet.code.DifferNode;
+import hexlet.code.Comparator;
+
 import java.util.List;
 import java.util.StringJoiner;
-import java.util.Objects;
 import java.util.Map;
 
 
 public class StylishFormatter {
-    public static String format(List<DifferNode> differences) {
+    public static String format(List<Map<String, Object>> differences) {
         StringJoiner result = new StringJoiner("\n");
         result.add("{");
 
-        for (DifferNode node : differences) {
-            String name = node.getName();
-            String oldValue = formatValue(node.getOldValue());
-            String newValue = formatValue(node.getNewValue());
-            String status = node.getStatus();
+        for (Map<String, Object> difference : differences) {
+            String name = (String) difference.get("name");
+            String status = (String) difference.get("status");
+            Object oldValue = difference.get("oldValue");
+            Object newValue = difference.get("newValue");
 
             switch (status) {
-                case "updated":
+                case Comparator.STATUS_UPDATE:
                     result.add(" - " + name + ": " + oldValue);
                     result.add(" + " + name + ": " + newValue);
                     break;
-                case "added":
+                case Comparator.STATUS_ADDED:
                     result.add(" + " + name + ": " + newValue);
                     break;
-                case "same":
+                case Comparator.STATUS_SAME:
                     result.add("   " + name + ": " + oldValue);
                     break;
-                case "removed":
+                case Comparator.STATUS_REMOVED:
                     result.add(" - " + name + ": " + oldValue);
                     break;
                 default:
@@ -38,12 +38,5 @@ public class StylishFormatter {
         }
         result.add("}");
         return result.toString();
-    }
-
-    private static String formatValue(Object value) {
-        if (value instanceof Map || value instanceof List) {
-            return value.toString();
-        }
-        return Objects.toString(value, "null");
     }
 }

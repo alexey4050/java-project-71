@@ -1,15 +1,15 @@
 package hexlet.code.formatters;
 
-import hexlet.code.DifferNode;
+import hexlet.code.Comparator;
 
 import java.util.List;
 import java.util.Map;
 
 public class PlainFormatter {
-    public static String format(List<DifferNode> nodes) {
+    public static String format(List<Map<String, Object>> differences) {
         StringBuilder result = new StringBuilder();
-        for (DifferNode node : nodes) {
-            String nodeOutput = processNode(node);
+        for (Map<String, Object> difference : differences) {
+            String nodeOutput = processNode(difference);
             if (!nodeOutput.isEmpty()) {
                 result.append(nodeOutput).append("\n");
             }
@@ -17,22 +17,24 @@ public class PlainFormatter {
         return result.toString().trim();
     }
 
-    private static String processNode(DifferNode node) {
+    private static String processNode(Map<String, Object> difference) {
         String result = "";
-        String property = node.getName();
-        String action = node.getStatus();
+        String property = (String) difference.get("name");
+        String action = (String) difference.get("status");
+        Object oldValue = difference.get("oldValue");
+        Object newValue = difference.get("newValue");
 
         switch (action) {
-            case "updated":
+            case Comparator.STATUS_UPDATE:
                 result = String.format("Property '%s' was updated. From %s to %s", property,
-                        formatValue(node.getOldValue()), formatValue(node.getNewValue()));
+                        formatValue(oldValue), formatValue(newValue));
                 break;
-            case "removed":
+            case Comparator.STATUS_REMOVED:
                 result = String.format("Property '%s' was removed", property);
                 break;
-            case "added":
+            case Comparator.STATUS_ADDED:
                 result = String.format("Property '%s' was added with value: %s", property,
-                        formatValue(node.getNewValue()));
+                        formatValue(newValue));
                 break;
             default:
                 break;

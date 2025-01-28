@@ -5,13 +5,14 @@ import hexlet.code.formatters.PlainFormatter;
 import hexlet.code.formatters.StylishFormatter;
 
 import java.util.List;
+import java.util.Map;
 
 public class Formatter {
-    public static String format(List<DifferNode> nodes, String formatName) {
+    public static String format(List<Map<String, Object>> differences, String formatName) {
         return switch (formatName) {
-            case "plain" -> PlainFormatter.format(nodes);
-            case "stylish" -> StylishFormatter.format(nodes);
-            case "json" ->  new JsonFormatter().format(nodes);
+            case "plain" -> PlainFormatter.format(differences);
+            case "stylish" -> StylishFormatter.format(differences);
+            case "json" ->  new JsonFormatter().format(differences);
             default -> throw new IllegalArgumentException("Unknown formatName: " + formatName);
         };
     }
