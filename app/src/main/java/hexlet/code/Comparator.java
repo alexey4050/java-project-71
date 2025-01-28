@@ -13,7 +13,7 @@ public class Comparator {
     public static final String STATUS_ADDED = "added";
     public static final String STATUS_REMOVED = "removed";
     public static final String STATUS_SAME = "same";
-    public static final String STATUS_UPDATE = "update";
+    public static final String STATUS_UPDATE = "updated";
 
     public static List<Map<String, Object>> compare(Map<String, Object> file1, Map<String, Object> file2) {
         List<Map<String, Object>> result = new ArrayList<>();

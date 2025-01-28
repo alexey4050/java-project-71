@@ -30,10 +30,11 @@ class DifferTest {
 
     @Test
     void testYamlJson() throws Exception {
-        String expectedJson = Files.readString(Paths.get(fixturesPath + "json_expected.txt"));
+        String expectedJson = Files.readString(Paths.get(fixturesPath
+                + "json_expected.txt")).replaceAll("\\s", " ").trim();
         String actualJson = Differ.generate(fixturesPath
                 + "file1.yml", fixturesPath + "file2.yml", "json");
-        assertEquals(expectedJson.trim(), actualJson.trim());
+        assertEquals(expectedJson, actualJson);
     }
 
     @Test
