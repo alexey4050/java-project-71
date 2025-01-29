@@ -10,18 +10,18 @@ import java.util.concurrent.Callable;
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "GenDiff v.1.0.0",
         description = "Compares two configuration files and shows a differences.")
 
-public class App implements Callable<Integer> {
+public final class App implements Callable<Integer> {
 
     private static final int SUCCESS_EXIT_CODE = 0;
     private static final int ERROR_EXIT_CODE = 1;
 
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]",
             defaultValue = "stylish", paramLabel = "format")
-    String formatName;
+    private String formatName;
     @Parameters(index = "0", description = "path to first file")
-    String filepath1;
+    private String filepath1;
     @Parameters(index = "1", description = "path to second file")
-    String filepath2;
+    private String filepath2;
 
     @Override
     public Integer call() throws Exception {
