@@ -12,9 +12,12 @@ import java.util.concurrent.Callable;
 
 public class App implements Callable<Integer> {
 
+    private static final int SUCCESS_EXIT_CODE = 0;
+    private static final int ERROR_EXIT_CODE = 1;
+
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]",
             defaultValue = "stylish", paramLabel = "format")
-    String format;
+    String formatName;
     @Parameters(index = "0", description = "path to first file")
     String filepath1;
     @Parameters(index = "1", description = "path to second file")
@@ -22,8 +25,14 @@ public class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        System.out.println(Differ.generate(filepath1, filepath2, format));
-        return 0;
+        try {
+            String formattedDiff = Differ.generate(filepath1, filepath2, formatName);
+            System.out.println(formattedDiff);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return ERROR_EXIT_CODE;
+        }
+        return SUCCESS_EXIT_CODE;
     }
 
     public static void main(String[] args) {

@@ -23,7 +23,7 @@ public class Differ {
     }
 
     public static String generate(String filepath1, String filepath2) throws Exception {
-        return generate(filepath1, filepath2, "json");
+        return generate(filepath1, filepath2, "stylish");
     }
 
     public static String readFile(String filePath) throws Exception {

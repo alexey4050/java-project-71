@@ -27,23 +27,22 @@ public class Comparator {
 
             if (!file1.containsKey(key)) {
                 difference.put("status", STATUS_ADDED);
+                difference.put("oldValue", null);
                 difference.put("newValue", file2.get(key));
-                result.add(difference);
             } else if (!file2.containsKey(key)) {
                 difference.put("status", STATUS_REMOVED);
                 difference.put("oldValue", file1.get(key));
-                result.add(difference);
+                difference.put("newValue", null);
             } else if (Objects.equals(file1.get(key), file2.get(key))) {
                 difference.put("status", STATUS_SAME);
                 difference.put("oldValue", file1.get(key));
                 difference.put("newValue", file2.get(key));
-                result.add(difference);
             } else {
                 difference.put("status", STATUS_UPDATE);
                 difference.put("oldValue", file1.get(key));
                 difference.put("newValue", file2.get(key));
-                result.add(difference);
             }
+            result.add(difference);
         }
         return result;
     }

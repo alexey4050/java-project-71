@@ -19,21 +19,21 @@ public class PlainFormatter {
 
     private static String processNode(Map<String, Object> difference) {
         String result = "";
-        String property = (String) difference.get("name");
-        String action = (String) difference.get("status");
+        String name = (String) difference.get("name");
+        String status = (String) difference.get("status");
         Object oldValue = difference.get("oldValue");
         Object newValue = difference.get("newValue");
 
-        switch (action) {
+        switch (status) {
             case Comparator.STATUS_UPDATE:
-                result = String.format("Property '%s' was updated. From %s to %s", property,
+                result = String.format("Property '%s' was updated. From %s to %s", name,
                         formatValue(oldValue), formatValue(newValue));
                 break;
             case Comparator.STATUS_REMOVED:
-                result = String.format("Property '%s' was removed", property);
+                result = String.format("Property '%s' was removed", name);
                 break;
             case Comparator.STATUS_ADDED:
-                result = String.format("Property '%s' was added with value: %s", property,
+                result = String.format("Property '%s' was added with value: %s", name,
                         formatValue(newValue));
                 break;
             default:

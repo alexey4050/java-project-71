@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Formatter {
-    public static String format(List<Map<String, Object>> differences, String formatName) {
+    public static String format(List<Map<String, Object>> differences, String formatName) throws Exception {
         return switch (formatName) {
             case "plain" -> PlainFormatter.format(differences);
             case "stylish" -> StylishFormatter.format(differences);
-            case "json" ->  new JsonFormatter().format(differences);
+            case "json" -> JsonFormatter.format(differences);
             default -> throw new IllegalArgumentException("Unknown formatName: " + formatName);
         };
     }

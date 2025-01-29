@@ -1,83 +1,47 @@
 package hexlet.code;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
 
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class DifferTest {
+    private static String expectedPlain;
+    private static String expectedStylish;
+    private static String expectedJson;
 
-    private final String fixturesPath = "src/test/resources/";
-    //@Test
-//    void testYamlStylish() throws Exception {
-//        String expectedStylish = Files.readString(Paths.get(fixturesPath
-//                + "stylish_expected.txt"));
-//        String actualStylish = Differ.generate(fixturesPath
-//                + "file1.yml", fixturesPath + "file2.yml", "stylish");
-//        assertEquals(expectedStylish.trim(), actualStylish.trim());
-//    }
-
-    @Test
-    void testYamlPlain() throws Exception {
-        String expectedPlain = Files.readString(Paths.get(fixturesPath + "plain_expected.txt"));
-        String actualPlain = Differ.generate(fixturesPath
-                + "file1.yml", fixturesPath + "file2.yml", "plain");
-        assertEquals(expectedPlain.trim(), actualPlain.trim());
+    private static Path getFixturePath(String fileName) {
+        return Paths.get("src", "test", "resources", "fixtures", fileName)
+                .toAbsolutePath().normalize();
     }
 
-    @Test
-    void testYamlJson() throws Exception {
-        String expectedJson = Files.readString(Paths.get(fixturesPath
-                + "json_expected.json"));
-        String actualJson = Differ.generate(fixturesPath
-                + "file1.yml", fixturesPath + "file2.yml", "json");
-        assertEquals(expectedJson.trim(), actualJson.trim());
+    private static String readFixture(String fileName) throws Exception {
+        Path filePath = getFixturePath(fileName);
+        return Files.readString(filePath).trim();
     }
 
-//    @Test
-//    void testJsonStylish() throws Exception {
-//        String expectedStylish = Files.readString(Paths.get(fixturesPath
-//                + "stylish_expected.txt"));
-//        String actualStylish = Differ.generate(fixturesPath
-//                + "file1.json", fixturesPath + "file2.json", "stylish");
-//        assertEquals(expectedStylish.trim(), actualStylish.trim());
-//    }
-
-    @Test
-    void testJsonPlain() throws Exception {
-        String expectedPlain = Files.readString(Paths.get(fixturesPath
-                + "plain_expected.txt"));
-        String actualPlain = Differ.generate(fixturesPath
-                + "file1.json", fixturesPath + "file2.json", "plain");
-        assertEquals(expectedPlain.trim(), actualPlain.trim());
+    @BeforeAll
+    public static void beforeAll() throws Exception {
+        expectedJson = readFixture("json_expected.json");
+        expectedPlain = readFixture("plain_expected.txt");
+        expectedStylish = readFixture("stylish_expected.txt");
     }
 
-    @Test
-    void testJsonJson() throws Exception {
-        String expectedJson = Files.readString(Paths.get(fixturesPath
-                + "json_expected.json"));
-        String actualJson = Differ.generate(fixturesPath
-                + "file1.json", fixturesPath + "file2.json", "json");
-        assertEquals(expectedJson.trim(), actualJson.trim());
-    }
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    public void generateTest(String format) throws Exception {
+        String filePath1 = getFixturePath("file1." + format).toString();
+        String filePath2 = getFixturePath("file2." + format).toString();
 
-    @Test
-    void testDifferGenerateJsonFromYaml() throws Exception {
-        String expectedJson = Files.readString(Paths.get(fixturesPath
-                + "json_expected.json"));
-        String actualJson = Differ.generate(fixturesPath + "file1.yml",
-                fixturesPath + "file2.yml");
-        assertEquals(expectedJson.trim(), actualJson.trim());
-    }
-
-    @Test
-    void testDifferGeneratePlainFromYaml() throws Exception {
-        String expectedJson = Files.readString(Paths.get(fixturesPath
-                + "plain_expected.txt"));
-        String actualJson = Differ.generate(fixturesPath + "file1.json",
-                fixturesPath + "file2.json", "plain");
-        assertEquals(expectedJson.trim(), actualJson.trim());
+        assertThat(Differ.generate(filePath1, filePath2)).isEqualTo(expectedStylish);
+        assertThat(Differ.generate(filePath1, filePath2, "stylish")).isEqualTo(expectedStylish);
+        assertThat(Differ.generate(filePath1, filePath2, "plain")).isEqualTo(expectedPlain);
+        assertThat(Differ.generate(filePath1, filePath2, "json")).isEqualTo(expectedJson);
     }
 }
+

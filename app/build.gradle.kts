@@ -23,6 +23,7 @@ dependencies {
     implementation("info.picocli:picocli:4.7.6")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.18.2")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.18.2")
+    testImplementation("org.assertj:assertj-core:3.22.0")
 }
 
 tasks.test {

@@ -19,18 +19,18 @@ public class StylishFormatter {
             Object newValue = difference.get("newValue");
 
             switch (status) {
+                case Comparator.STATUS_ADDED:
+                    result.add(" + " + name + ": " + newValue);
+                    break;
+                case Comparator.STATUS_REMOVED:
+                    result.add(" - " + name + ": " + oldValue);
+                    break;
                 case Comparator.STATUS_UPDATE:
                     result.add(" - " + name + ": " + oldValue);
                     result.add(" + " + name + ": " + newValue);
                     break;
-                case Comparator.STATUS_ADDED:
-                    result.add(" + " + name + ": " + newValue);
-                    break;
                 case Comparator.STATUS_SAME:
                     result.add("   " + name + ": " + oldValue);
-                    break;
-                case Comparator.STATUS_REMOVED:
-                    result.add(" - " + name + ": " + oldValue);
                     break;
                 default:
                     break;
