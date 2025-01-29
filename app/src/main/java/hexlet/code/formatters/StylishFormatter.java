@@ -20,17 +20,17 @@ public class StylishFormatter {
 
             switch (status) {
                 case Comparator.STATUS_ADDED:
-                    result.add(" + " + name + ": " + newValue);
+                    result.add("  + " + name + ": " + newValue);
                     break;
                 case Comparator.STATUS_REMOVED:
-                    result.add(" - " + name + ": " + oldValue);
+                    result.add("  - " + name + ": " + oldValue);
                     break;
                 case Comparator.STATUS_UPDATE:
-                    result.add(" - " + name + ": " + oldValue);
-                    result.add(" + " + name + ": " + newValue);
+                    result.add("  - " + name + ": " + oldValue);
+                    result.add("  + " + name + ": " + newValue);
                     break;
                 case Comparator.STATUS_SAME:
-                    result.add("   " + name + ": " + oldValue);
+                    result.add("    " + name + ": " + oldValue);
                     break;
                 default:
                     break;
