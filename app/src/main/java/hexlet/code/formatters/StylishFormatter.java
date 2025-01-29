@@ -20,17 +20,17 @@ public class StylishFormatter {
 
             switch (status) {
                 case Comparator.STATUS_ADDED:
-                    result.add(" + " + name + ": " + (newValue instanceof String ? newValue : formatValue(newValue)));
+                    result.add(" + " + name + ": " + newValue);
                     break;
                 case Comparator.STATUS_REMOVED:
-                    result.add(" - " + name + ": " + (oldValue instanceof String ? oldValue : formatValue(oldValue)));
+                    result.add(" - " + name + ": " + oldValue);
                     break;
                 case Comparator.STATUS_UPDATE:
-                    result.add(" - " + name + ": " + (oldValue instanceof String ? oldValue : formatValue(oldValue)));
-                    result.add(" + " + name + ": " + (newValue instanceof String ? newValue : formatValue(newValue)));
+                    result.add(" - " + name + ": " + oldValue);
+                    result.add(" + " + name + ": " + newValue);
                     break;
                 case Comparator.STATUS_SAME:
-                    result.add("   " + name + ": " + (oldValue instanceof String ? oldValue : formatValue(oldValue)));
+                    result.add("   " + name + ": " + oldValue);
                     break;
                 default:
                     break;
@@ -38,11 +38,5 @@ public class StylishFormatter {
         }
         result.add("}");
         return result.toString();
-    }
-    private static String formatValue(Object value) {
-        if (value instanceof List) {
-            return ((List<?>) value).toString();
-        }
-        return String.valueOf(value);
     }
 }
